@@ -1,0 +1,44 @@
+services:
+  # Base de datos PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: naruto_db
+    environment:
+      POSTGRES_USER: naruto_user
+      POSTGRES_PASSWORD: konoha123
+      POSTGRES_DB: naruto_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - naruto_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U naruto_user -d naruto_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Servidor Flask
+  web:
+    build: .
+    container_name: naruto_web
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://naruto_user:konoha123@db:5432/naruto_db
+      FLASK_ENV: development
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - naruto_network
+    volumes:
+      - .:/app
+
+networks:
+  naruto_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
