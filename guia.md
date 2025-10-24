@@ -1,116 +1,23 @@
-# 🚀 Guía de Instalación Paso a Paso
 
-## Paso 1: Crear la estructura de carpetas
 
-Abre tu terminal y ejecuta:
 
-```bash
-# Crear carpeta principal del proyecto
-mkdir naruto-ninja-system
-cd naruto-ninja-system
-
-# Crear carpeta para templates
-mkdir templates
-```
-
-## Paso 2: Crear los archivos
-
-Crea cada archivo en su ubicación correspondiente con el contenido proporcionado:
-
-### 📄 Archivos en la raíz del proyecto:
-
-1. **app.py** - Servidor Flask principal
-2. **models.py** - Modelos de base de datos
-3. **requirements.txt** - Dependencias Python
-4. **Dockerfile** - Configuración Docker
-5. **docker-compose.yml** - Orquestación de servicios
-6. **.gitignore** - Archivos a ignorar
-7. **README.md** - Documentación
-
-### 📄 Archivo en la carpeta templates:
-
-1. **templates/index.html** - Interfaz web
-
-## Paso 3: Verificar la estructura
-
-Tu proyecto debe verse así:
-
-```
-naruto-ninja-system/
-│
-├── app.py
-├── models.py
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
-├── .gitignore
-├── README.md
-│
-└── templates/
-    └── index.html
-```
-
-Verifica con:
-```bash
-ls -la
-ls templates/
-```
-
-## Paso 4: Instalar Docker
-
-Si no tienes Docker instalado:
-
-### En Ubuntu/Debian:
-```bash
-# Actualizar repositorios
-sudo apt update
-
-# Instalar Docker
-sudo apt install docker.io docker-compose -y
-
-# Iniciar Docker
-sudo systemctl start docker
-sudo systemctl enable docker
-
-# Agregar tu usuario al grupo docker
-sudo usermod -aG docker $USER
-
-# Reiniciar sesión o ejecutar
-newgrp docker
-```
-
-### En macOS:
-Descarga e instala Docker Desktop desde: https://www.docker.com/products/docker-desktop
-
-### En Windows:
-Descarga e instala Docker Desktop desde: https://www.docker.com/products/docker-desktop
-
-## Paso 5: Verificar instalación de Docker
-
-```bash
-# Verificar versión de Docker
-docker --version
 
 # Verificar versión de Docker Compose
 docker-compose --version
 
-# Debería mostrar algo como:
-# Docker version 24.0.x
-# Docker Compose version v2.x.x
+
 ```
 
-## Paso 6: Construir y ejecutar el proyecto
+Construir y ejecutar el proyecto
 
 Desde la carpeta raíz del proyecto (`naruto-ninja-system/`):
 
 ```bash
-# Construir las imágenes y levantar los contenedores
+#Construir las imágenes y levantar los contenedores
 docker-compose up --build
 ```
 
-**Nota:** La primera vez puede tomar varios minutos ya que descarga las imágenes base y construye todo.
-
-## Paso 7: Verificar que todo funciona
+Verificar que todo funciona
 
 Verás logs similares a:
 
@@ -121,15 +28,14 @@ naruto_web   | * Running on http://127.0.0.1:5000
 naruto_web   | * Running on http://172.18.0.3:5000
 ```
 
-## Paso 8: Acceder a la aplicación
+Acceder a la aplicación
 
 Abre tu navegador y visita:
 
 **http://localhost:5000**
 
-¡Deberías ver la interfaz del Sistema de Gestión de Ninjas! 🎉
 
-## Paso 9: Probar la aplicación
+##  Probar la aplicación
 
 1. **Registra un ninja:**
    - Ve a la pestaña "Ninjas"
