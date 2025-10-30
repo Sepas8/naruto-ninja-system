@@ -3,208 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión de Ninjas - Konohagakure</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .tabs {
-            display: flex;
-            background: #f5f5f5;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            background: #f5f5f5;
-            border: none;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .tab:hover {
-            background: #e0e0e0;
-        }
-
-        .tab.active {
-            background: white;
-            border-bottom: 3px solid #667eea;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .content {
-            padding: 30px;
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: border 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .card {
-            background: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        .badge-genin { background: #95e1d3; color: #037971; }
-        .badge-chunin { background: #feca57; color: #c47e00; }
-        .badge-jonin { background: #ff6b6b; color: #8b0000; }
-        .badge-d { background: #a8e6cf; color: #2d6a4f; }
-        .badge-c { background: #dcedc1; color: #52734d; }
-        .badge-b { background: #ffd3b6; color: #bc6c25; }
-        .badge-a { background: #ffaaa5; color: #a4161a; }
-        .badge-s { background: #ff8b94; color: #6a040f; }
-
-        .stats {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .stat {
-            background: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .btn-small {
-            padding: 5px 15px;
-            font-size: 14px;
-            margin-right: 5px;
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-        }
-    </style>
+    <title>Los ingeninjas</title>
+    <link rel="stylesheet" href="/pagina/css/styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🍥 Sistema de Gestión de Ninjas</h1>
-            <p>Konohagakure - Aldea Oculta de la Hoja</p>
+            <h1>🍥 Sistema Ninjas</h1>
+            <p>Santa Fé de Konoha  - Aldea Oculta de Cundinamarca</p>
         </header>
 
         <div class="tabs">
@@ -215,7 +21,9 @@
         </div>
 
         <div class="content">
-            <!-- SECCIÓN NINJAS -->
+            <!-- ============================================
+                 SECCIÓN NINJAS
+                 ============================================ -->
             <div id="ninjas" class="section active">
                 <h2>Gestión de Ninjas</h2>
                 <div id="alert-ninjas"></div>
@@ -237,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label>Aldea:</label>
-                            <input type="text" id="ninja-aldea" value="Konohagakure">
+                            <input type="text" id="ninja-aldea" value="Konoha Tabogo">
                         </div>
                         <div class="form-group">
                             <label>Ataque (0-100):</label>
@@ -253,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jutsus (separados por comas):</label>
-                            <input type="text" id="ninja-jutsus" placeholder="Ej: Rasengan, Kage Bunshin">
+                            <input type="text" id="ninja-jutsus" placeholder="Ej: Rasengan, Kage Bunshin, los trakes, su cabezaso">
                         </div>
                         <button type="submit">Registrar Ninja</button>
                     </form>
@@ -263,7 +71,9 @@
                 <div id="lista-ninjas" class="grid"></div>
             </div>
 
-            <!-- SECCIÓN MISIONES -->
+            <!-- ============================================
+                 SECCIÓN MISIONES
+                 ============================================ -->
             <div id="misiones" class="section">
                 <h2>Gestión de Misiones</h2>
                 <div id="alert-misiones"></div>
@@ -301,7 +111,9 @@
                 <div id="lista-misiones" class="grid"></div>
             </div>
 
-            <!-- SECCIÓN ASIGNACIONES -->
+            <!-- ============================================
+                 SECCIÓN ASIGNACIONES
+                 ============================================ -->
             <div id="asignaciones" class="section">
                 <h2>Asignar Misiones a Ninjas</h2>
                 <div id="alert-asignaciones"></div>
@@ -325,313 +137,52 @@
                 <div id="lista-asignaciones"></div>
             </div>
 
-            <!-- SECCIÓN REPORTES -->
+            <!-- ============================================
+                 SECCIÓN REPORTES CON EXPORTACIÓN 
+                 ============================================ -->
             <div id="reportes" class="section">
                 <h2>Reportes y Estadísticas</h2>
+                <div id="alert-reportes"></div>
                 
-                <button onclick="cargarReporteNinjas()" style="margin-bottom: 20px;">📊 Generar Reporte de Ninjas</button>
-                <button onclick="cargarReporteMisiones()" style="margin-bottom: 20px; margin-left: 10px;">📋 Generar Reporte de Misiones</button>
+                <button onclick="cargarReporteNinjas()" class="btn-info">
+                    📊 Generar Reporte de Ninjas
+                </button>
+                <button onclick="cargarReporteMisiones()" class="btn-info" style="margin-left: 10px;">
+                    📋 Generar Reporte de Misiones
+                </button>
                 
-                <div id="reporte-container"></div>
+                <div id="reporte-container" style="margin-top: 20px;"></div>
+
+                <!-- 
+                     EXPORTACIÓN 
+                      -->
+                <div class="export-section">
+                    <h3>📥 Exportar Informes </h3>
+                    <p> lista de ninjas y misiones.</p>
+                    
+                    <div class="export-buttons">
+                        <button onclick="exportarDatos('texto')" class="btn-export btn-success">
+                            📄 Exportar a TEXTO
+                        </button>
+                        <button onclick="exportarDatos('json')" class="btn-export btn-info">
+                            📋 Exportar a JSON
+                        </button>
+                        <button onclick="exportarDatos('xml')" class="btn-export btn-warning">
+                            🗂️ Exportar a XML
+                        </button>
+                    </div>
+
+                    <div class="preview-area" style="display: block;">
+                        <h4>Vista Previa del Último Informe:</h4>
+                        <pre id="preview-content">Selecciona un formato de exportación para generar el informe...</pre>
+                    </div>
+                </div>
+
+                
             </div>
         </div>
     </div>
 
-    <script>
-        const API_URL = '/api';
-
-        // Navegación entre secciones
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-            
-            if (sectionId === 'ninjas') cargarNinjas();
-            if (sectionId === 'misiones') cargarMisiones();
-            if (sectionId === 'asignaciones') {
-                cargarAsignaciones();
-                cargarSelectores();
-            }
-        }
-
-        // Mostrar alertas
-        function mostrarAlerta(containerId, mensaje, tipo) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = `<div class="alert alert-${tipo}">${mensaje}</div>`;
-            setTimeout(() => container.innerHTML = '', 3000);
-        }
-
-        // ===== NINJAS =====
-        document.getElementById('form-ninja').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const ninja = {
-                nombre: document.getElementById('ninja-nombre').value,
-                rango: document.getElementById('ninja-rango').value,
-                aldea: document.getElementById('ninja-aldea').value,
-                ataque: parseInt(document.getElementById('ninja-ataque').value),
-                defensa: parseInt(document.getElementById('ninja-defensa').value),
-                chakra: parseInt(document.getElementById('ninja-chakra').value),
-                jutsus: document.getElementById('ninja-jutsus').value
-            };
-
-            try {
-                const response = await fetch(`${API_URL}/ninjas`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(ninja)
-                });
-
-                if (response.ok) {
-                    mostrarAlerta('alert-ninjas', '¡Ninja registrado correctamente!', 'success');
-                    e.target.reset();
-                    cargarNinjas();
-                } else {
-                    const error = await response.json();
-                    mostrarAlerta('alert-ninjas', error.error || 'Error al registrar', 'error');
-                }
-            } catch (error) {
-                mostrarAlerta('alert-ninjas', 'Error de conexión', 'error');
-            }
-        });
-
-        async function cargarNinjas() {
-            try {
-                const response = await fetch(`${API_URL}/ninjas`);
-                const ninjas = await response.json();
-                
-                const container = document.getElementById('lista-ninjas');
-                container.innerHTML = ninjas.map(ninja => `
-                    <div class="card">
-                        <h3>${ninja.nombre}</h3>
-                        <span class="badge badge-${ninja.rango.toLowerCase()}">${ninja.rango}</span>
-                        <p><strong>Aldea:</strong> ${ninja.aldea}</p>
-                        <div class="stats">
-                            <div class="stat">⚔️ Ataque: ${ninja.ataque}</div>
-                            <div class="stat">🛡️ Defensa: ${ninja.defensa}</div>
-                            <div class="stat">💙 Chakra: ${ninja.chakra}</div>
-                        </div>
-                        <p><strong>Jutsus:</strong> ${ninja.jutsus.join(', ') || 'Ninguno'}</p>
-                        <button class="btn-small btn-danger" onclick="eliminarNinja(${ninja.id})">Eliminar</button>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error al cargar ninjas:', error);
-            }
-        }
-
-        async function eliminarNinja(id) {
-            if (!confirm('¿Estás seguro de eliminar este ninja?')) return;
-            
-            try {
-                const response = await fetch(`${API_URL}/ninjas/${id}`, { method: 'DELETE' });
-                if (response.ok) {
-                    mostrarAlerta('alert-ninjas', 'Ninja eliminado', 'success');
-                    cargarNinjas();
-                }
-            } catch (error) {
-                mostrarAlerta('alert-ninjas', 'Error al eliminar', 'error');
-            }
-        }
-
-        // ===== MISIONES =====
-        document.getElementById('form-mision').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const mision = {
-                nombre: document.getElementById('mision-nombre').value,
-                rango: document.getElementById('mision-rango').value,
-                recompensa: parseInt(document.getElementById('mision-recompensa').value),
-                descripcion: document.getElementById('mision-descripcion').value
-            };
-
-            try {
-                const response = await fetch(`${API_URL}/misiones`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(mision)
-                });
-
-                if (response.ok) {
-                    mostrarAlerta('alert-misiones', '¡Misión registrada correctamente!', 'success');
-                    e.target.reset();
-                    cargarMisiones();
-                } else {
-                    const error = await response.json();
-                    mostrarAlerta('alert-misiones', error.error || 'Error al registrar', 'error');
-                }
-            } catch (error) {
-                mostrarAlerta('alert-misiones', 'Error de conexión', 'error');
-            }
-        });
-
-        async function cargarMisiones() {
-            try {
-                const response = await fetch(`${API_URL}/misiones`);
-                const misiones = await response.json();
-                
-                const container = document.getElementById('lista-misiones');
-                container.innerHTML = misiones.map(mision => `
-                    <div class="card">
-                        <h3>${mision.nombre}</h3>
-                        <span class="badge badge-${mision.rango.toLowerCase()}">Rango ${mision.rango}</span>
-                        <p><strong>Recompensa:</strong> ${mision.recompensa} Ryō</p>
-                        <p>${mision.descripcion}</p>
-                        <button class="btn-small btn-danger" onclick="eliminarMision(${mision.id})">Eliminar</button>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error al cargar misiones:', error);
-            }
-        }
-
-        async function eliminarMision(id) {
-            if (!confirm('¿Estás seguro de eliminar esta misión?')) return;
-            
-            try {
-                const response = await fetch(`${API_URL}/misiones/${id}`, { method: 'DELETE' });
-                if (response.ok) {
-                    mostrarAlerta('alert-misiones', 'Misión eliminada', 'success');
-                    cargarMisiones();
-                }
-            } catch (error) {
-                mostrarAlerta('alert-misiones', 'Error al eliminar', 'error');
-            }
-        }
-
-        // ===== ASIGNACIONES =====
-        async function cargarSelectores() {
-            try {
-                const [ninjasRes, misionesRes] = await Promise.all([
-                    fetch(`${API_URL}/ninjas`),
-                    fetch(`${API_URL}/misiones`)
-                ]);
-
-                const ninjas = await ninjasRes.json();
-                const misiones = await misionesRes.json();
-
-                document.getElementById('asig-ninja').innerHTML = ninjas.map(n => 
-                    `<option value="${n.id}">${n.nombre} (${n.rango})</option>`
-                ).join('');
-
-                document.getElementById('asig-mision').innerHTML = misiones.map(m => 
-                    `<option value="${m.id}">${m.nombre} (Rango ${m.rango})</option>`
-                ).join('');
-            } catch (error) {
-                console.error('Error al cargar selectores:', error);
-            }
-        }
-
-        document.getElementById('form-asignacion').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const asignacion = {
-                ninja_id: parseInt(document.getElementById('asig-ninja').value),
-                mision_id: parseInt(document.getElementById('asig-mision').value)
-            };
-
-            try {
-                const response = await fetch(`${API_URL}/asignaciones`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(asignacion)
-                });
-
-                if (response.ok) {
-                    mostrarAlerta('alert-asignaciones', '¡Misión asignada correctamente!', 'success');
-                    cargarAsignaciones();
-                } else {
-                    const error = await response.json();
-                    mostrarAlerta('alert-asignaciones', error.error || 'Error al asignar', 'error');
-                }
-            } catch (error) {
-                mostrarAlerta('alert-asignaciones', 'Error de conexión', 'error');
-            }
-        });
-
-        async function cargarAsignaciones() {
-            try {
-                const response = await fetch(`${API_URL}/asignaciones`);
-                const asignaciones = await response.json();
-                
-                const container = document.getElementById('lista-asignaciones');
-                container.innerHTML = asignaciones.map(asig => `
-                    <div class="card">
-                        <h3>🥷 ${asig.ninja_nombre} ➡️ 📋 ${asig.mision_nombre}</h3>
-                        <p><strong>Estado:</strong> ${asig.completada ? '✅ Completada' : '⏳ En progreso'}</p>
-                        <p><strong>Fecha asignación:</strong> ${new Date(asig.fecha_asignacion).toLocaleDateString()}</p>
-                        ${!asig.completada ? `<button class="btn-small" onclick="completarMision(${asig.id})">Marcar como Completada</button>` : ''}
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error al cargar asignaciones:', error);
-            }
-        }
-
-        async function completarMision(id) {
-            try {
-                const response = await fetch(`${API_URL}/asignaciones/${id}/completar`, {
-                    method: 'PUT'
-                });
-
-                if (response.ok) {
-                    mostrarAlerta('alert-asignaciones', '¡Misión completada!', 'success');
-                    cargarAsignaciones();
-                }
-            } catch (error) {
-                mostrarAlerta('alert-asignaciones', 'Error al completar', 'error');
-            }
-        }
-
-        // ===== REPORTES =====
-        async function cargarReporteNinjas() {
-            try {
-                const response = await fetch(`${API_URL}/reportes/ninjas`);
-                const reporte = await response.json();
-                
-                const container = document.getElementById('reporte-container');
-                container.innerHTML = '<h3>Reporte de Ninjas</h3>' + reporte.map(item => `
-                    <div class="card">
-                        <h3>${item.ninja.nombre}</h3>
-                        <span class="badge badge-${item.ninja.rango.toLowerCase()}">${item.ninja.rango}</span>
-                        <p><strong>Aldea:</strong> ${item.ninja.aldea}</p>
-                        <div class="stats">
-                            <div class="stat">⚔️ Ataque: ${item.ninja.ataque}</div>
-                            <div class="stat">🛡️ Defensa: ${item.ninja.defensa}</div>
-                            <div class="stat">💙 Chakra: ${item.ninja.chakra}</div>
-                        </div>
-                        <p><strong>Misiones asignadas:</strong> ${item.misiones_asignadas}</p>
-                        <p><strong>Misiones completadas:</strong> ${item.misiones_completadas}</p>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error al cargar reporte:', error);
-            }
-        }
-
-        async function cargarReporteMisiones() {
-            try {
-                const response = await fetch(`${API_URL}/reportes/misiones`);
-                const reporte = await response.json();
-                
-                const container = document.getElementById('reporte-container');
-                container.innerHTML = '<h3>Reporte de Misiones</h3>' + reporte.map(item => `
-                    <div class="card">
-                        <h3>${item.mision.nombre}</h3>
-                        <span class="badge badge-${item.mision.rango.toLowerCase()}">Rango ${item.mision.rango}</span>
-                        <p><strong>Recompensa:</strong> ${item.mision.recompensa} Ryō</p>
-                        <p><strong>Ninjas asignados:</strong> ${item.ninjas_asignados.join(', ') || 'Ninguno'}</p>
-                        <p><strong>Estado:</strong> ${item.completada ? '✅ Completada' : '⏳ Pendiente'}</p>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error al cargar reporte:', error);
-            }
-        }
-
-        // Cargar datos iniciales
-        cargarNinjas();
-    </script>
+    <script src="/pagina/js/app.js"></script>
 </body>
 </html>

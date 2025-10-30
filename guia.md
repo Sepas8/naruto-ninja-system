@@ -19,7 +19,7 @@ docker-compose up --build
 
 Verificar que todo funciona
 
-Verás logs similares a:
+
 
 ```
 naruto_db    | database system is ready to accept connections
