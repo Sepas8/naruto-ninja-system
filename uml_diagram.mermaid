@@ -1,0 +1,353 @@
+classDiagram
+    %% ========================================
+    %% ENTIDADES PRINCIPALES DEL DOMINIO
+    %% ========================================
+    
+    class Ninja {
+        -Integer id
+        -String nombre
+        -String rango
+        -Integer ataque
+        -Integer defensa
+        -Integer chakra
+        -String aldea
+        -Text jutsus
+        -DateTime fecha_registro
+        -List~AsignacionMision~ asignaciones
+        +__init__(nombre, rango, ataque, defensa, chakra, aldea, jutsus)
+        +to_dict() dict
+        +__repr__() str
+        +agregar_jutsu(jutsu: str) void
+        +obtener_jutsus() List~str~
+        +tiene_rango_suficiente(rango_mision: str) bool
+    }
+
+    class Mision {
+        -Integer id
+        -String nombre
+        -String rango
+        -Integer recompensa
+        -Text descripcion
+        -DateTime fecha_creacion
+        -List~AsignacionMision~ asignaciones
+        +__init__(nombre, rango, recompensa, descripcion)
+        +to_dict() dict
+        +__repr__() str
+        +obtener_rango_numerico() int
+        +es_completable_por(ninja: Ninja) bool
+    }
+
+    class Aldea {
+        -String nombre
+        -String pais
+        -List~Ninja~ ninjas
+        +__init__(nombre, pais)
+        +agregar_ninja(ninja: Ninja) void
+        +listar_ninjas() List~Ninja~
+        +contar_ninjas_por_rango(rango: str) int
+    }
+
+    class Jutsu {
+        -String nombre
+        -String tipo
+        -Integer costo_chakra
+        -String descripcion
+        -String rango_minimo
+        +__init__(nombre, tipo, costo_chakra, descripcion, rango_minimo)
+        +puede_ser_usado_por(ninja: Ninja) bool
+        +ejecutar() void
+    }
+
+    class AsignacionMision {
+        -Integer id
+        -Integer ninja_id
+        -Integer mision_id
+        -DateTime fecha_asignacion
+        -DateTime fecha_completado
+        -Boolean completada
+        -Ninja ninja
+        -Mision mision
+        +__init__(ninja_id, mision_id)
+        +to_dict() dict
+        +__repr__() str
+        +marcar_completada() void
+        +calcular_duracion() timedelta
+        +es_activa() bool
+    }
+
+    %% ========================================
+    %% CAPA DE APLICACIÓN (FLASK APP)
+    %% ========================================
+
+    class FlaskApp {
+        -SQLAlchemy db
+        -Flask app
+        -Config configuracion
+        +__init__()
+        +crear_app() Flask
+        +inicializar_db() void
+        +registrar_rutas() void
+        +configurar_cors() void
+        +manejar_errores() void
+    }
+
+    class Config {
+        -String DATABASE_URL
+        -Boolean DEBUG
+        -String SECRET_KEY
+        -Boolean SQLALCHEMY_TRACK_MODIFICATIONS
+        +__init__()
+        +from_env() Config
+        +validar() bool
+    }
+
+    %% ========================================
+    %% CONTROLADORES (LÓGICA DE NEGOCIO)
+    %% ========================================
+
+    class NinjaController {
+        +listar_ninjas() Response~JSON~
+        +consultar_ninja(id: int) Response~JSON~
+        +registrar_ninja(data: dict) Response~JSON~
+        +actualizar_ninja(id: int, data: dict) Response~JSON~
+        +eliminar_ninja(id: int) Response~JSON~
+        -validar_datos_ninja(data: dict) bool
+        -validar_rango(rango: str) bool
+    }
+
+    class MisionController {
+        +listar_misiones() Response~JSON~
+        +consultar_mision(id: int) Response~JSON~
+        +registrar_mision(data: dict) Response~JSON~
+        +actualizar_mision(id: int, data: dict) Response~JSON~
+        +eliminar_mision(id: int) Response~JSON~
+        -validar_datos_mision(data: dict) bool
+        -validar_rango_mision(rango: str) bool
+    }
+
+    class AsignacionController {
+        +listar_asignaciones() Response~JSON~
+        +consultar_asignacion(id: int) Response~JSON~
+        +asignar_mision(data: dict) Response~JSON~
+        +completar_mision(id: int) Response~JSON~
+        +cancelar_asignacion(id: int) Response~JSON~
+        -validar_compatibilidad_rango(ninja: Ninja, mision: Mision) bool
+        -verificar_disponibilidad_ninja(ninja_id: int) bool
+    }
+
+    class ReporteController {
+        +reporte_ninjas() Response~JSON~
+        +reporte_misiones() Response~JSON~
+        +reporte_asignaciones() Response~JSON~
+        +estadisticas_generales() Response~JSON~
+        +reporte_por_aldea(aldea: str) Response~JSON~
+        -calcular_estadisticas_ninja(ninja: Ninja) dict
+        -calcular_estadisticas_mision(mision: Mision) dict
+    }
+
+    %% ========================================
+    %% CAPA DE PERSISTENCIA
+    %% ========================================
+
+    class Database {
+        <<SQLAlchemy>>
+        -Engine engine
+        -Session session
+        -MetaData metadata
+        +__init__(url: str)
+        +crear_todas_tablas() void
+        +eliminar_todas_tablas() void
+        +obtener_sesion() Session
+        +commit() void
+        +rollback() void
+        +cerrar() void
+    }
+
+    class NinjaRepository {
+        -Session session
+        +obtener_todos() List~Ninja~
+        +obtener_por_id(id: int) Ninja
+        +obtener_por_rango(rango: str) List~Ninja~
+        +obtener_por_aldea(aldea: str) List~Ninja~
+        +guardar(ninja: Ninja) Ninja
+        +actualizar(ninja: Ninja) Ninja
+        +eliminar(id: int) bool
+        +contar_por_rango(rango: str) int
+    }
+
+    class MisionRepository {
+        -Session session
+        +obtener_todas() List~Mision~
+        +obtener_por_id(id: int) Mision
+        +obtener_por_rango(rango: str) List~Mision~
+        +obtener_disponibles() List~Mision~
+        +guardar(mision: Mision) Mision
+        +actualizar(mision: Mision) Mision
+        +eliminar(id: int) bool
+    }
+
+    class AsignacionRepository {
+        -Session session
+        +obtener_todas() List~AsignacionMision~
+        +obtener_por_id(id: int) AsignacionMision
+        +obtener_por_ninja(ninja_id: int) List~AsignacionMision~
+        +obtener_por_mision(mision_id: int) List~AsignacionMision~
+        +obtener_activas() List~AsignacionMision~
+        +guardar(asignacion: AsignacionMision) AsignacionMision
+        +actualizar(asignacion: AsignacionMision) AsignacionMision
+        +eliminar(id: int) bool
+    }
+
+    %% ========================================
+    %% CAPA DE PRESENTACIÓN (CLIENTE)
+    %% ========================================
+
+    class WebClient {
+        <<HTML/JavaScript>>
+        -String baseURL
+        -APIClient apiClient
+        +mostrarAlerta(mensaje: str, tipo: str) void
+        +cargarNinjas() void
+        +cargarMisiones() void
+        +cargarAsignaciones() void
+        +cargarReportes() void
+        +mostrarSeccion(id: str) void
+        +renderizarNinja(ninja: dict) HTML
+        +renderizarMision(mision: dict) HTML
+        +manejarFormularioNinja() void
+        +manejarFormularioMision() void
+        +manejarFormularioAsignacion() void
+    }
+
+    class APIClient {
+        <<JavaScript>>
+        -String baseURL
+        +get(endpoint: str) Promise~Response~
+        +post(endpoint: str, data: dict) Promise~Response~
+        +put(endpoint: str, data: dict) Promise~Response~
+        +delete(endpoint: str) Promise~Response~
+        -manejarError(error: Error) void
+        -procesarRespuesta(response: Response) Promise~JSON~
+    }
+
+    %% ========================================
+    %% SERVICIOS Y UTILIDADES
+    %% ========================================
+
+    class ValidadorRangos {
+        <<Service>>
+        +validar_rango_ninja(rango: str) bool
+        +validar_rango_mision(rango: str) bool
+        +obtener_jerarquia_ninja(rango: str) int
+        +obtener_jerarquia_mision(rango: str) int
+        +puede_realizar_mision(rango_ninja: str, rango_mision: str) bool
+    }
+
+    class GeneradorReportes {
+        <<Service>>
+        +generar_reporte_ninja(ninja: Ninja) dict
+        +generar_reporte_mision(mision: Mision) dict
+        +generar_estadisticas_generales() dict
+        +exportar_a_json(datos: dict) str
+        +exportar_a_csv(datos: List~dict~) str
+    }
+
+    class ManejadorErrores {
+        <<Service>>
+        +manejar_error_404(error) Response
+        +manejar_error_400(error) Response
+        +manejar_error_500(error) Response
+        +registrar_error(error: Exception) void
+    }
+
+    %% ========================================
+    %% RELACIONES ENTRE ENTIDADES
+    %% ========================================
+
+    Ninja "1" --> "0..*" AsignacionMision : tiene
+    Mision "1" --> "0..*" AsignacionMision : se asigna en
+    AsignacionMision --> "1" Ninja : asignado a
+    AsignacionMision --> "1" Mision : corresponde a
+    Ninja --> "1" Aldea : pertenece a
+    Aldea "1" --> "0..*" Ninja : contiene
+    Ninja "0..*" --> "0..*" Jutsu : conoce
+
+    %% ========================================
+    %% RELACIONES CON CONTROLADORES
+    %% ========================================
+
+    FlaskApp --> NinjaController : registra
+    FlaskApp --> MisionController : registra
+    FlaskApp --> AsignacionController : registra
+    FlaskApp --> ReporteController : registra
+    FlaskApp --> Database : utiliza
+    FlaskApp --> Config : configura
+    FlaskApp --> ManejadorErrores : utiliza
+
+    %% ========================================
+    %% CONTROLADORES USAN MODELOS
+    %% ========================================
+
+    NinjaController ..> Ninja : gestiona
+    NinjaController ..> NinjaRepository : usa
+    NinjaController ..> ValidadorRangos : valida con
+
+    MisionController ..> Mision : gestiona
+    MisionController ..> MisionRepository : usa
+    MisionController ..> ValidadorRangos : valida con
+
+    AsignacionController ..> AsignacionMision : gestiona
+    AsignacionController ..> Ninja : consulta
+    AsignacionController ..> Mision : consulta
+    AsignacionController ..> AsignacionRepository : usa
+    AsignacionController ..> ValidadorRangos : valida con
+
+    ReporteController ..> Ninja : consulta
+    ReporteController ..> Mision : consulta
+    ReporteController ..> AsignacionMision : consulta
+    ReporteController ..> GeneradorReportes : usa
+    ReporteController ..> NinjaRepository : usa
+    ReporteController ..> MisionRepository : usa
+    ReporteController ..> AsignacionRepository : usa
+
+    %% ========================================
+    %% REPOSITORIOS USAN DATABASE
+    %% ========================================
+
+    NinjaRepository --> Database : accede
+    MisionRepository --> Database : accede
+    AsignacionRepository --> Database : accede
+
+    %% ========================================
+    %% REPOSITORIOS GESTIONAN MODELOS
+    %% ========================================
+
+    NinjaRepository ..> Ninja : persiste
+    MisionRepository ..> Mision : persiste
+    AsignacionRepository ..> AsignacionMision : persiste
+
+    %% ========================================
+    %% CLIENTE USA API
+    %% ========================================
+
+    WebClient --> APIClient : utiliza
+    APIClient --> NinjaController : HTTP GET/POST/PUT/DELETE
+    APIClient --> MisionController : HTTP GET/POST/DELETE
+    APIClient --> AsignacionController : HTTP GET/POST/PUT
+    APIClient --> ReporteController : HTTP GET
+
+    %% ========================================
+    %% NOTAS IMPORTANTES
+    %% ========================================
+
+    note for Ninja "Representa un ninja de la aldea.\nRangos válidos: Genin, Chūnin, Jōnin\nContiene estadísticas de combate\ny lista de jutsus conocidos"
+
+    note for Mision "Representa una misión.\nRangos válidos: D, C, B, A, S\n(de menor a mayor dificultad)\nIncluye recompensa en Ryō"
+
+    note for AsignacionMision "Tabla de unión entre Ninja y Misión.\nValida que el ninja tenga el rango\nsuficiente antes de asignar.\nPermite marcar como completada"
+
+    note for Aldea "Representa una aldea ninja.\nEjemplos: Konohagakure,\nSunagakure, Kirigakure"
+
+    note for Jutsu "Representa una técnica ninja.\nTipos: Ninjutsu, Genjutsu,\nTaijutsu, Kekkei Genkai"
+
+    note for ValidadorRangos "Valida compatibilidad de rangos:\nGenin: misiones D, C\nChūnin: misiones D, C, B\nJōnin: todas las misiones"
